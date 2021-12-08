@@ -1,6 +1,7 @@
+package Client;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
