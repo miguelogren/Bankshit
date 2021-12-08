@@ -2,6 +2,8 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LogIn {
     public static void main(String[] args) {
@@ -26,7 +28,7 @@ public class LogIn {
         JLabel password = new JLabel("Password:");
 
         JTextArea user = new JTextArea();
-        JTextArea pass = new JTextArea();
+        JPasswordField pass = new JPasswordField();
 
         JCheckBox showPassword = new JCheckBox("Show password");
 
@@ -36,17 +38,26 @@ public class LogIn {
         username.setOpaque(false);
 
         user.setFont(new Font("Arial", Font.ITALIC, 16));
-        user.setPreferredSize(new Dimension(150,20));
+        user.setPreferredSize(new Dimension(150,22));
         user.setLineWrap(true);
-        //user.append("Username");
 
         pass.setFont(new Font("Arial", Font.ITALIC, 16));
-        pass.setPreferredSize(new Dimension(150,20));
-        pass.setLineWrap(true);
-        //pass.append("Password");
+        pass.setPreferredSize(new Dimension(157,30));
 
         password.setFont(new Font("Arial", Font.BOLD, 18));
         password.setOpaque(false);
+
+        showPassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (showPassword.isSelected()) {
+                    pass.setEchoChar((char) 0);
+                } else {
+                    pass.setEchoChar('*');
+            }
+            }
+        });
+
 
         login.setFont(new Font("Arial", Font.ITALIC, 16));
         login.setPreferredSize(new Dimension(100,30));
