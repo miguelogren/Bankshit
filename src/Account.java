@@ -11,7 +11,7 @@ public class Account {
 
 
     public void writeToFile(Person person, int daily, int savings) throws IOException {
-        String fileName = person.getFirstName() + person.getLastName() + ".txt";
+        String fileName = person.getIdNumber()+ ".txt";
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, TRUE)));
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line = reader.readLine();
@@ -35,7 +35,7 @@ public class Account {
     }
 
     public int getDailyAccount(Person person) throws IOException {
-        String fileName = person.getFirstName() + person.getLastName() + ".txt";
+        String fileName = person.getIdNumber()+ ".txt";
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         int daily=0;
         String line = reader.readLine();
@@ -50,7 +50,7 @@ public class Account {
     }
 
     public int getSavingsAccount(Person person) throws IOException {
-        String fileName = person.getFirstName() + person.getLastName() + ".txt";
+        String fileName = person.getIdNumber()+ ".txt";
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         int savings=0;
 
@@ -65,7 +65,7 @@ public class Account {
     }
 
     public void transferMoney(Person person, int amount, String fromAcc, String ToAcc) throws IOException {
-        String fileName = person.getFirstName() + person.getLastName() + ".txt";
+        String fileName = person.getIdNumber()+ ".txt";
         PrintWriter printer;
         int newDaily;
         int newSavings;
@@ -95,7 +95,7 @@ public class Account {
         Account a = new Account();
         a.writeToFile(p, 10000, 10000);
 
-        //a.transferMoney(p,5000,"D", "S");
+        a.transferMoney(p,5000,"D", "S");
         System.out.println("Daily: " + a.getDailyAccount(p));
         System.out.println("Savings: " +  a.getSavingsAccount(p));
 

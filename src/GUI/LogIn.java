@@ -6,16 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+
+import static java.lang.Boolean.TRUE;
 
 public class LogIn {
 
     JLabel username = new JLabel("Username:");
     JLabel password = new JLabel("Password:");
     JButton login = new JButton("Login");
+    JButton createUser = new JButton("Create user");
     JTextArea user = new JTextArea();
+    JPasswordField pass = new JPasswordField();
 
     LogIn() {
         JFrame jFrame = new JFrame();
@@ -28,7 +30,7 @@ public class LogIn {
         jFrame.pack();
         jFrame.add(jPanel);
         jFrame.setTitle("Login");
-        jFrame.setSize(400, 250);
+        jFrame.setSize(400, 300);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(jPanel);
@@ -36,12 +38,11 @@ public class LogIn {
         jFrame.setVisible(true);
 
 
-        JPasswordField pass = new JPasswordField();
-
         JCheckBox showPassword = new JCheckBox("Show password");
 
 
         login.addMouseListener(buttonClick);
+        createUser.addMouseListener(buttonClick);
 
         username.setFont(new Font("Arial", Font.BOLD, 18));
         username.setOpaque(false);
@@ -71,6 +72,9 @@ public class LogIn {
         login.setFont(new Font("Arial", Font.ITALIC, 16));
         login.setPreferredSize(new Dimension(100, 30));
 
+        createUser.setFont(new Font("Arial", Font.ITALIC, 16));
+        createUser.setPreferredSize(new Dimension(100, 30));
+
         gbc.gridy = 0;
         gbc.gridx = 0;
         jPanel.add(username, gbc);
@@ -95,6 +99,11 @@ public class LogIn {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
         jPanel.add(login, gbc);
+
+        gbc.gridy = 4;
+        gbc.gridx = 0;
+        gbc.gridwidth = 5;
+        jPanel.add(createUser, gbc);
     }
 
     MouseAdapter buttonClick = new MouseAdapter() {
@@ -110,8 +119,16 @@ public class LogIn {
                     String line = input.readLine();
                     s = user.getText();
                     while (line != null) {
-                        if (line.equalsIgnoreCase(s)) {
-                            System.out.println( "Välkommen tillbaka " + s);
+                        if (line.equalsIgnoreCase("id: " + s)) {
+                            line = input.readLine();
+                            s = pass.getText();
+                            if(line.equalsIgnoreCase("password: " + s)) {
+                                System.out.println("Välkommen tillbaka " + user.getText());
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Wrong password. Try again!");
+                                break;
+                            }
                             break;
                         } else {
                             line = input.readLine();
@@ -121,11 +138,12 @@ public class LogIn {
                             }
                         }
                     }
-
-
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+            }
+            if (src == createUser) {
+               new CreateUser();
             }
 
         }

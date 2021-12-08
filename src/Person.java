@@ -55,4 +55,10 @@ public class Person {
     public void setNationality(String nationality) {
         this.nationality = nationality;
     }
+
+    public String getIdNumber() {return idNumber;}
+
+    public void setIdNumber(String idNumber) {this.idNumber = idNumber; }
+
+
 }
