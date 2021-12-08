@@ -69,7 +69,7 @@ public class Account {
     }
 
     public static void main(String[] args) throws IOException {
-        Person p = new Person("9412170137", "Erik", "Holllander", "Male", "Hamngatan 13a", "Sweden");
+        Person p = new Person("9412170137", "Erik", "Hollander", "Male", "Hamngatan 13a", "Sweden");
         Account a = new Account();
         a.writeToFile(p, 10000, 500);
         System.out.println(a.getDailyAccount(p));
