@@ -12,7 +12,7 @@ public class Account {
 
     public void writeToFile(Person person, int daily, int savings) throws IOException {
         String fileName = person.getFirstName() + person.getLastName() + ".txt";
-        PrintWriter printer = printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, TRUE)));
+        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, TRUE)));
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line = reader.readLine();
 
@@ -71,19 +71,15 @@ public class Account {
         int newSavings;
 
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        String line = reader.readLine();
 
         if(fromAcc.startsWith("D")){
-                if(line.startsWith("D")){
                     newDaily = getDailyAccount(person) - amount;
                     newSavings = getSavingsAccount(person) + amount;
-                    System.out.println(newSavings);
                     printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, FALSE)));
                     printer.println("Daily account: " + newDaily);
                     printer.println("Savings account: " + newSavings);
-                }else{
-                    line = reader.readLine();
-                }
+                    printer.close();
+
 
         }else{
             newDaily = getDailyAccount(person) + amount;
@@ -91,18 +87,17 @@ public class Account {
             printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, FALSE)));
             printer.println("Daily account: " + newDaily);
             printer.println("Savings account: " + newSavings);
+            printer.close();
         }
-
-
     }
-
     public static void main(String[] args) throws IOException {
         Person p = new Person("9412170137", "Erik", "Hollander", "Male", "Hamngatan 13a", "Sweden");
         Account a = new Account();
-        a.writeToFile(p, 10000, 500);
-        System.out.println(a.getDailyAccount(p));
-        System.out.println(a.getSavingsAccount(p));
+        a.writeToFile(p, 10000, 10000);
 
+        //a.transferMoney(p,5000,"D", "S");
+        System.out.println("Daily: " + a.getDailyAccount(p));
+        System.out.println("Savings: " +  a.getSavingsAccount(p));
 
     }
 
