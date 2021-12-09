@@ -17,7 +17,8 @@ public class LogIn extends JPanel{
     JButton loginButton = new JButton("Login");
     JTextArea userTextArea = new JTextArea();
     JButton createUser = new JButton("Create user");
-    JPasswordField pass = new JPasswordField();
+    JPasswordField passwordField = new JPasswordField();
+    JCheckBox showPasswordBox = new JCheckBox("Show password");
 
     LogIn() {
 
@@ -26,12 +27,6 @@ public class LogIn extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 20, 30);
         gbc.anchor = GridBagConstraints.CENTER;
-
-
-        JPasswordField passwordField = new JPasswordField();
-
-        JCheckBox showPasswordBox = new JCheckBox("Show password");
-
 
         loginButton.addMouseListener(buttonClick);
         createUser.addMouseListener(buttonClick);
@@ -42,7 +37,7 @@ public class LogIn extends JPanel{
         userTextArea.setFont(new Font("Arial", Font.ITALIC, 16));
         userTextArea.setPreferredSize(new Dimension(150, 22));
         userTextArea.setLineWrap(true);
-        userTextArea.setOpaque(false);
+        userTextArea.setOpaque(true);
 
         passwordField.setFont(new Font("Arial", Font.ITALIC, 16));
         passwordField.setPreferredSize(new Dimension(157, 30));
@@ -114,9 +109,9 @@ public class LogIn extends JPanel{
                     while (line != null) {
                         if (line.equalsIgnoreCase("id: " + s)) {
                             line = input.readLine();
-                            s = pass.getText();
+                            s = passwordField.getText();
                             if(line.equalsIgnoreCase("password: " + s)) {
-                                System.out.println("Välkommen tillbaka " + user.getText());
+                                System.out.println("Välkommen tillbaka " + userTextArea.getText());
                             }
                             else{
                                 JOptionPane.showMessageDialog(null, "Wrong password. Try again!");
