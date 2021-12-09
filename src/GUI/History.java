@@ -1,4 +1,13 @@
 package GUI;
 
-public class History {
+import javax.swing.*;
+import java.awt.*;
+
+public class History extends JPanel {
+
+    public History(){
+
+        setLayout(new GridBagLayout());
+
+    }
 }

@@ -1,11 +1,16 @@
+package Client;
+
 public class Person {
+
+    private String idNumber;
     private String firstName;
     private String lastName;
     private String gender;
     private String address;
     private String nationality;
 
-    public Person(String firstName, String lastName, String gender, String address, String nationality) {
+    public Person(String idNumber, String firstName, String lastName, String gender, String address, String nationality) {
+        this.idNumber = idNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -52,5 +57,10 @@ public class Person {
     public void setNationality(String nationality) {
         this.nationality = nationality;
     }
+
+    public String getIdNumber() {return idNumber;}
+
+    public void setIdNumber(String idNumber) {this.idNumber = idNumber; }
+
 
 }
