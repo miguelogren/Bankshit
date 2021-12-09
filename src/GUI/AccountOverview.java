@@ -3,69 +3,69 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class AccountOverview {
-    public static void main(String[] args) {
-        JFrame jFrame = new JFrame();
-        JPanel jPanel = new JPanel(new GridBagLayout());
+public class AccountOverview extends JPanel {
+
+    public AccountOverview(){
+
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.CENTER;
 
-        JLabel DailyAcc = new JLabel("Daily acc", SwingConstants.CENTER);
-        JLabel SavingAcc = new JLabel("Saving acc", SwingConstants.CENTER);
+        JLabel dailyAccLabel = new JLabel("Daily acc", SwingConstants.CENTER);
+        JLabel savingsAccLabel = new JLabel("Saving acc", SwingConstants.CENTER);
 
-        JButton pay = new JButton("Betala");
-        JButton transfer = new JButton("Överför");
-        JButton gamble = new JButton("Spela");
+        JButton payButton = new JButton("Betala");
+        JButton transferButton = new JButton("Överför");
+        JButton gambleButton = new JButton("Spela");
 
-        jFrame.setVisible(true);
-        jFrame.pack();
-        jFrame.add(jPanel);
-        jFrame.setTitle("Bank");
-        jFrame.setSize(500,600);
-        jFrame.setLocationRelativeTo(null);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500,600);
 
         Color panelColor = new Color(30,120,200);
         Color labelColor = new Color(30, 140, 250);
 
-        jPanel.setVisible(true);
-        jPanel.setBackground(panelColor);
+        setBackground(panelColor);
 
-        DailyAcc.setOpaque(true);
-        DailyAcc.setPreferredSize(new Dimension(475, 100));
-        DailyAcc.setFont(new Font("Arial", Font.BOLD, 32));
+        dailyAccLabel.setOpaque(true);
+        dailyAccLabel.setPreferredSize(new Dimension(475, 100));
+        dailyAccLabel.setFont(new Font("Arial", Font.BOLD, 32));
 
-        SavingAcc.setOpaque(true);
-        SavingAcc.setPreferredSize(new Dimension(475,100));
-        SavingAcc.setFont(new Font("Arial", Font.BOLD, 32));
+        savingsAccLabel.setOpaque(true);
+        savingsAccLabel.setPreferredSize(new Dimension(475,100));
+        savingsAccLabel.setFont(new Font("Arial", Font.BOLD, 32));
 
-        pay.setPreferredSize(new Dimension(475, 100));
-        transfer.setPreferredSize(new Dimension(475, 100));
-        gamble.setPreferredSize(new Dimension(475, 100));
+        payButton.setPreferredSize(new Dimension(475, 100));
+        transferButton.setPreferredSize(new Dimension(475, 100));
+        gambleButton.setPreferredSize(new Dimension(475, 100));
 
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        jPanel.add(DailyAcc, gbc);
+        add(dailyAccLabel, gbc);
 
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        jPanel.add(SavingAcc, gbc);
+        add(savingsAccLabel, gbc);
 
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.BOTH;
-        jPanel.add(pay, gbc);
+        add(payButton, gbc);
 
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.BOTH;
-        jPanel.add(transfer, gbc);
+        add(transferButton, gbc);
 
         gbc.gridy = 4;
         gbc.fill = GridBagConstraints.BOTH;
-        jPanel.add(gamble, gbc);
+        add(gambleButton, gbc);
 
 
 
+    }
+
+    public static void main(String[] args) {
+        Window window = new Window();
+        window.add(new AccountOverview());
+        window.pack(); //måste ha detta här för att window skall bli rätt size
     }
 }
 
