@@ -10,100 +10,93 @@ import java.io.*;
 
 import static java.lang.Boolean.TRUE;
 
-public class LogIn {
+public class LogIn extends JPanel{
 
-    JLabel username = new JLabel("Username:");
-    JLabel password = new JLabel("Password:");
-    JButton login = new JButton("Login");
+    JLabel usernameLabel = new JLabel("Username:");
+    JLabel passwordLabel = new JLabel("Password:");
+    JButton loginButton = new JButton("Login");
+    JTextArea userTextArea = new JTextArea();
     JButton createUser = new JButton("Create user");
-    JTextArea user = new JTextArea();
     JPasswordField pass = new JPasswordField();
 
     LogIn() {
-        JFrame jFrame = new JFrame();
-        JPanel jPanel = new JPanel(new GridBagLayout());
+
+        setPreferredSize(new Dimension(400, 250));
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 20, 30);
         gbc.anchor = GridBagConstraints.CENTER;
 
-        jFrame.setVisible(true);
-        jFrame.pack();
-        jFrame.add(jPanel);
-        jFrame.setTitle("Login");
-        jFrame.setSize(400, 300);
-        jFrame.setLocationRelativeTo(null);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.add(jPanel);
 
-        jFrame.setVisible(true);
+        JPasswordField passwordField = new JPasswordField();
+
+        JCheckBox showPasswordBox = new JCheckBox("Show password");
 
 
-        JCheckBox showPassword = new JCheckBox("Show password");
-
-
-        login.addMouseListener(buttonClick);
+        loginButton.addMouseListener(buttonClick);
         createUser.addMouseListener(buttonClick);
 
-        username.setFont(new Font("Arial", Font.BOLD, 18));
-        username.setOpaque(false);
+        usernameLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        usernameLabel.setOpaque(false);
 
-        user.setFont(new Font("Arial", Font.ITALIC, 16));
-        user.setPreferredSize(new Dimension(150, 22));
-        user.setLineWrap(true);
+        userTextArea.setFont(new Font("Arial", Font.ITALIC, 16));
+        userTextArea.setPreferredSize(new Dimension(150, 22));
+        userTextArea.setLineWrap(true);
+        userTextArea.setOpaque(false);
 
-        pass.setFont(new Font("Arial", Font.ITALIC, 16));
-        pass.setPreferredSize(new Dimension(157, 30));
+        passwordField.setFont(new Font("Arial", Font.ITALIC, 16));
+        passwordField.setPreferredSize(new Dimension(157, 30));
 
-        password.setFont(new Font("Arial", Font.BOLD, 18));
-        password.setOpaque(false);
+        passwordLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        passwordLabel.setOpaque(false);
 
-        showPassword.addActionListener(new ActionListener() {
+        showPasswordBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (showPassword.isSelected()) {
-                    pass.setEchoChar((char) 0);
+                if (showPasswordBox.isSelected()) {
+                    passwordField.setEchoChar((char) 0);
                 } else {
-                    pass.setEchoChar('*');
+                    passwordField.setEchoChar('*');
                 }
             }
         });
 
 
-        login.setFont(new Font("Arial", Font.ITALIC, 16));
-        login.setPreferredSize(new Dimension(100, 30));
+        loginButton.setFont(new Font("Arial", Font.ITALIC, 16));
+        loginButton.setPreferredSize(new Dimension(100, 30));
 
         createUser.setFont(new Font("Arial", Font.ITALIC, 16));
         createUser.setPreferredSize(new Dimension(100, 30));
 
         gbc.gridy = 0;
         gbc.gridx = 0;
-        jPanel.add(username, gbc);
+        add(usernameLabel, gbc);
 
         gbc.gridy = 0;
         gbc.gridx = 1;
-        jPanel.add(user, gbc);
+        add(userTextArea, gbc);
 
         gbc.gridy = 1;
         gbc.gridx = 0;
-        jPanel.add(password, gbc);
+        add(passwordLabel, gbc);
 
         gbc.gridy = 1;
         gbc.gridx = 1;
-        jPanel.add(pass, gbc);
+        add(passwordField, gbc);
 
         gbc.gridy = 2;
         gbc.gridx = 1;
-        jPanel.add(showPassword, gbc);
+        add(showPasswordBox, gbc);
 
         gbc.gridy = 3;
         gbc.gridx = 0;
         gbc.gridwidth = 2;
-        jPanel.add(login, gbc);
+        add(loginButton, gbc);
 
         gbc.gridy = 4;
         gbc.gridx = 0;
         gbc.gridwidth = 5;
-        jPanel.add(createUser, gbc);
+        add(createUser, gbc);
     }
 
     MouseAdapter buttonClick = new MouseAdapter() {
@@ -113,11 +106,11 @@ public class LogIn {
             Object src = e.getSource();
             String s;
 
-            if (src == login) {
+            if (src == loginButton) {
                 try {
                     BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
                     String line = input.readLine();
-                    s = user.getText();
+                    s = userTextArea.getText();
                     while (line != null) {
                         if (line.equalsIgnoreCase("id: " + s)) {
                             line = input.readLine();
@@ -130,7 +123,8 @@ public class LogIn {
                                 break;
                             }
                             break;
-                        } else {
+                        }
+                        else {
                             line = input.readLine();
                             if (line == null) {
                                 System.out.println( "Användaren hittas ej - Korrigera felstavning eller" +
@@ -150,7 +144,9 @@ public class LogIn {
     };
 
     public static void main(String[] args) {
-        new LogIn();
+        Window window = new Window();
+        window.add(new LogIn());
+        window.pack(); //måste ha detta här för att window skall bli rätt size
     }
 }
 
