@@ -14,7 +14,7 @@ public class Account {
         this.person = person;
     }
 
-    public void writeToFile(Person person, int daily, int savings) throws IOException {
+    public void writeToFile(int daily, int savings) throws IOException {
         String fileName = person.getIdNumber()+ ".txt";
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, TRUE)));
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -38,7 +38,7 @@ public class Account {
         printer.close();
     }
 
-    public int getDailyAccount(Person person) throws IOException {
+    public int getDailyAccount() throws IOException {
         String fileName = person.getIdNumber()+ ".txt";
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         int daily=0;
@@ -53,7 +53,7 @@ public class Account {
         return daily;
     }
 
-    public int getSavingsAccount(Person person) throws IOException {
+    public int getSavingsAccount() throws IOException {
         String fileName = person.getIdNumber()+ ".txt";
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         int savings=0;
@@ -68,7 +68,7 @@ public class Account {
         return savings;
     }
 
-    public void transferMoney(Person person, int amount, String fromAcc, String ToAcc) throws IOException {
+    public void transferMoney(int amount, String fromAcc, String ToAcc) throws IOException {
         String fileName = person.getIdNumber()+ ".txt";
         PrintWriter printer;
         int newDaily;
@@ -77,8 +77,8 @@ public class Account {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
         if(fromAcc.startsWith("D")){
-                    newDaily = getDailyAccount(person) - amount;
-                    newSavings = getSavingsAccount(person) + amount;
+                    newDaily = getDailyAccount() - amount;
+                    newSavings = getSavingsAccount() + amount;
                     printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, FALSE)));
                     printer.println("Daily account: " + newDaily);
                     printer.println("Savings account: " + newSavings);
@@ -86,8 +86,8 @@ public class Account {
 
 
         }else{
-            newDaily = getDailyAccount(person) + amount;
-            newSavings = getSavingsAccount(person) - amount;
+            newDaily = getDailyAccount() + amount;
+            newSavings = getSavingsAccount() - amount;
             printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, FALSE)));
             printer.println("Daily account: " + newDaily);
             printer.println("Savings account: " + newSavings);

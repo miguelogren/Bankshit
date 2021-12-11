@@ -202,11 +202,10 @@ public class CreateUser extends JPanel {
                             Person person = new Person(idNumberInput.getText(), firstNameInput.getText(), lastNameInput.getText(),
                                     genderInput.getText(), addressInput.getText(), nationalityInput.getText());
                             Account a = new Account(person);
-                            a.writeToFile(person, 0, 0);
+                            a.writeToFile(0, 0);
 
                             Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
 
-                            //Client.Bank.setPerson(person);
 
 
                         } catch (IOException ex) {
@@ -220,7 +219,11 @@ public class CreateUser extends JPanel {
             }
 
             if (src == returnButton) {
-                Window.window.swapPage(Window.Page.LOGIN);
+                try {
+                    Window.window.swapPage(Window.Page.LOGIN);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
 
         }

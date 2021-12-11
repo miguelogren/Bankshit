@@ -33,3 +33,17 @@ lastName:
 gender: 
 address: 
 nationality 
+id: 55551
+password: 
+firstname: Erik
+lastName: 
+gender: 
+address: 
+nationality 
+id: 2222
+password: 
+firstname: 
+lastName: 
+gender: 
+address: 
+nationality 

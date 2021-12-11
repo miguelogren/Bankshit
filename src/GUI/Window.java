@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 import javax.xml.transform.Transformer;
 import java.awt.*;
+import java.io.IOException;
 
 
 public class Window extends JFrame{
@@ -22,7 +23,7 @@ public class Window extends JFrame{
         setSize(500,700);
 
     }
-    public void swapPage(Page page) {
+    public void swapPage(Page page) throws IOException {
         remove(currentPage);
         switch (page) {
             case LOGIN: {
@@ -43,7 +44,7 @@ public class Window extends JFrame{
         revalidate();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         window = new Window();
         window.swapPage(Page.LOGIN);
     }

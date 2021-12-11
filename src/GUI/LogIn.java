@@ -116,6 +116,7 @@ public class LogIn extends JPanel{
                             s = passwordField.getText();
                             if(line.equalsIgnoreCase("password: " + s)) {
                                 Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
+                                
                             }
                             else{
                                 JOptionPane.showMessageDialog(null, "Wrong password. Try again!");
@@ -137,7 +138,11 @@ public class LogIn extends JPanel{
             }
             if (src == createUser) {
 
+                try {
                     Window.window.swapPage(Window.Page.CREATEUSER);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
 
         }

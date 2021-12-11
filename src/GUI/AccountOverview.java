@@ -17,8 +17,9 @@ public class AccountOverview extends JPanel {
     JLabel dailyAccLabel = new JLabel("Daily acc", SwingConstants.CENTER);
     JLabel savingsAccLabel = new JLabel("Saving acc", SwingConstants.CENTER);
 
+    Account account;
 
-    public AccountOverview() {
+    public AccountOverview() throws IOException {
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -29,7 +30,6 @@ public class AccountOverview extends JPanel {
         add(savingsAccLabel);
 
         setSize(700,500);
-
 
         Color panelColor = new Color(30,120,200);
         Color labelColor = new Color(30, 140, 250);
