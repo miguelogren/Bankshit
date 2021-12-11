@@ -1,25 +1,35 @@
 package GUI;
 
+import Client.Account;
+import Client.Bank;
+import Client.Person;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class AccountOverview extends JPanel {
 
-    public AccountOverview(){
+    JButton payButton = new JButton("Betala");
+    JButton transferButton = new JButton("Överför");
+    JButton gambleButton = new JButton("Spela");
+
+    JLabel dailyAccLabel = new JLabel("Daily acc", SwingConstants.CENTER);
+    JLabel savingsAccLabel = new JLabel("Saving acc", SwingConstants.CENTER);
+
+
+    public AccountOverview() {
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.CENTER;
 
-        JLabel dailyAccLabel = new JLabel("Daily acc", SwingConstants.CENTER);
-        JLabel savingsAccLabel = new JLabel("Saving acc", SwingConstants.CENTER);
+        add(dailyAccLabel);
+        add(savingsAccLabel);
 
-        JButton payButton = new JButton("Betala");
-        JButton transferButton = new JButton("Överför");
-        JButton gambleButton = new JButton("Spela");
+        setSize(700,500);
 
-        setSize(500,600);
 
         Color panelColor = new Color(30,120,200);
         Color labelColor = new Color(30, 140, 250);
@@ -58,14 +68,7 @@ public class AccountOverview extends JPanel {
         gbc.fill = GridBagConstraints.BOTH;
         add(gambleButton, gbc);
 
-
-
     }
 
-    public static void main(String[] args) {
-        Window window = new Window();
-        window.add(new AccountOverview());
-        window.pack(); //måste ha detta här för att window skall bli rätt size
-    }
 }
 

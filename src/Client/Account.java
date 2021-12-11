@@ -10,6 +10,9 @@ public class Account {
     Person person;
     ArrayList<Integer> accountList = new ArrayList<>();
 
+    public Account (Person person){
+        this.person = person;
+    }
 
     public void writeToFile(Person person, int daily, int savings) throws IOException {
         String fileName = person.getIdNumber()+ ".txt";
@@ -92,13 +95,7 @@ public class Account {
         }
     }
     public static void main(String[] args) throws IOException {
-        Person p = new Person("9412170137", "Erik", "Hollander", "Male", "Hamngatan 13a", "Sweden");
-        Account a = new Account();
-        a.writeToFile(p, 10000, 10000);
 
-        a.transferMoney(p,5000,"D", "S");
-        System.out.println("Daily: " + a.getDailyAccount(p));
-        System.out.println("Savings: " +  a.getSavingsAccount(p));
 
     }
 

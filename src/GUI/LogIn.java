@@ -1,5 +1,7 @@
 package GUI;
 
+import Client.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,8 @@ public class LogIn extends JPanel{
     JButton createUser = new JButton("Create user");
     JPasswordField passwordField = new JPasswordField();
     JCheckBox showPasswordBox = new JCheckBox("Show password");
+
+
 
     LogIn() {
 
@@ -111,7 +115,7 @@ public class LogIn extends JPanel{
                             line = input.readLine();
                             s = passwordField.getText();
                             if(line.equalsIgnoreCase("password: " + s)) {
-                                System.out.println("Välkommen tillbaka " + userTextArea.getText());
+                                Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
                             }
                             else{
                                 JOptionPane.showMessageDialog(null, "Wrong password. Try again!");
@@ -122,7 +126,7 @@ public class LogIn extends JPanel{
                         else {
                             line = input.readLine();
                             if (line == null) {
-                                System.out.println( "Användaren hittas ej - Korrigera felstavning eller" +
+                                JOptionPane.showMessageDialog(null, "Användaren hittas ej - Korrigera felstavning eller" +
                                         " skapa ny användare");
                             }
                         }
@@ -132,7 +136,8 @@ public class LogIn extends JPanel{
                 }
             }
             if (src == createUser) {
-               new CreateUser();
+
+                    Window.window.swapPage(Window.Page.CREATEUSER);
             }
 
         }
@@ -140,7 +145,6 @@ public class LogIn extends JPanel{
 
     public static void main(String[] args) {
         Window window = new Window();
-        window.add(new LogIn());
         window.pack(); //måste ha detta här för att window skall bli rätt size
     }
 }
