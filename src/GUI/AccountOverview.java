@@ -1,7 +1,6 @@
 package GUI;
 
 import Client.Account;
-import Client.Bank;
 import Client.Person;
 
 import javax.swing.*;
