@@ -7,6 +7,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class Account {
+
     Person person;
     ArrayList<Integer> accountList = new ArrayList<>();
 

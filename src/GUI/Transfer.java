@@ -2,7 +2,12 @@ package GUI;
 
 public class Transfer {
 
-    Window frame = new Window();
+    public void dailyToSavings(){
 
+    }
+
+    public void savingsToDaily(){
+
+    }
 
 }
