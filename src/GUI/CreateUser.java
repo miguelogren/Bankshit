@@ -1,5 +1,9 @@
 package GUI;
 
+import Client.Account;
+import Client.Bank;
+import Client.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +14,7 @@ import java.io.*;
 
 import static java.lang.Boolean.TRUE;
 
-public class CreateUser extends JFrame {
+public class CreateUser extends JPanel {
     JLabel idNumber = new JLabel("Id number:");
     JLabel password = new JLabel("Password:");
     JLabel firstName = new JLabel("First name");
@@ -32,19 +36,13 @@ public class CreateUser extends JFrame {
     JPasswordField pass = new JPasswordField();
 
     CreateUser() {
-        JPanel jPanel = new JPanel(new GridBagLayout());
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 20, 30);
         gbc.anchor = GridBagConstraints.CENTER;
 
         setVisible(true);
-        pack();
-        add(jPanel);
-        setTitle("Login");
-        setSize(500, 700);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        add(jPanel);
+        setPreferredSize(new Dimension(500, 700));
 
         setVisible(true);
 
@@ -93,73 +91,73 @@ public class CreateUser extends JFrame {
 
         gbc.gridy = 0;
         gbc.gridx = 0;
-        jPanel.add(idNumber, gbc);
+        add(idNumber, gbc);
 
         gbc.gridy = 0;
         gbc.gridx = 1;
-        jPanel.add(idNumberInput, gbc);
+        add(idNumberInput, gbc);
 
         gbc.gridy = 1;
         gbc.gridx = 0;
-        jPanel.add(password, gbc);
+        add(password, gbc);
 
         gbc.gridy = 1;
         gbc.gridx = 1;
-        jPanel.add(pass, gbc);
+        add(pass, gbc);
 
         gbc.gridy = 2;
         gbc.gridx = 1;
-        jPanel.add(showPassword, gbc);
+        add(showPassword, gbc);
 
         gbc.gridy = 3;
         gbc.gridx = 0;
-        jPanel.add(firstName, gbc);
+        add(firstName, gbc);
 
         gbc.gridy = 3;
         gbc.gridx = 1;
-        jPanel.add(firstNameInput, gbc);
+        add(firstNameInput, gbc);
 
         gbc.gridy = 4;
         gbc.gridx = 0;
-        jPanel.add(lastName, gbc);
+        add(lastName, gbc);
 
         gbc.gridy = 4;
         gbc.gridx = 1;
-        jPanel.add(lastNameInput, gbc);
+        add(lastNameInput, gbc);
 
         gbc.gridy = 5;
         gbc.gridx = 0;
-        jPanel.add(gender, gbc);
+        add(gender, gbc);
 
         gbc.gridy = 5;
         gbc.gridx = 1;
-        jPanel.add(genderInput, gbc);
+        add(genderInput, gbc);
 
         gbc.gridy = 6;
         gbc.gridx = 0;
-        jPanel.add(address, gbc);
+        add(address, gbc);
 
         gbc.gridy = 6;
         gbc.gridx = 1;
-        jPanel.add(addressInput, gbc);
+        add(addressInput, gbc);
 
         gbc.gridy = 7;
         gbc.gridx = 0;
-        jPanel.add(nationality, gbc);
+        add(nationality, gbc);
 
         gbc.gridy = 7;
         gbc.gridx = 1;
-        jPanel.add(nationalityInput, gbc);
+        add(nationalityInput, gbc);
 
         gbc.gridy = 8;
         gbc.gridx = 0;
         gbc.gridwidth = 2;
-        jPanel.add(save, gbc);
+        add(save, gbc);
 
         gbc.gridy = 8;
         gbc.gridx = 1;
         gbc.gridwidth = 1;
-        jPanel.add(returnButton, gbc);
+        add(returnButton, gbc);
 
     }
 
@@ -171,7 +169,7 @@ public class CreateUser extends JFrame {
             String s;
 
             if (src == save) {
-                boolean shouldPrint=true;
+                boolean shouldPrint = true;
                 try {
                     BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
                     String line = input.readLine();
@@ -180,11 +178,11 @@ public class CreateUser extends JFrame {
                         line = input.readLine();
                         if (line != null && line.equalsIgnoreCase("id: " + s)) {
                             JOptionPane.showMessageDialog(null, "Already registered user");
-                            shouldPrint=false;
+                            shouldPrint = false;
                             break;
                         }
                     }
-                    if(shouldPrint) {
+                    if (shouldPrint) {
                         PrintWriter print;
                         try {
                             print = new PrintWriter(new BufferedWriter(new FileWriter("Users.txt", TRUE)));
@@ -201,6 +199,16 @@ public class CreateUser extends JFrame {
                             JOptionPane.showMessageDialog(null, "User information saved");
                             setVisible(false);
 
+                            Person person = new Person(idNumberInput.getText(), firstNameInput.getText(), lastNameInput.getText(),
+                                    genderInput.getText(), addressInput.getText(), nationalityInput.getText());
+                            Account a = new Account(person);
+                            a.writeToFile(person, 0, 0);
+
+                            Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
+
+                            //Client.Bank.setPerson(person);
+
+
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
@@ -212,7 +220,7 @@ public class CreateUser extends JFrame {
             }
 
             if (src == returnButton) {
-                setVisible(false);
+                Window.window.swapPage(Window.Page.LOGIN);
             }
 
         }
@@ -232,7 +240,4 @@ public class CreateUser extends JFrame {
         return jTextArea;
     }
 
-    public static void main(String[] args) {
-        new CreateUser();
-    }
 }
