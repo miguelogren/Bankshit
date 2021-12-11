@@ -1,5 +1,6 @@
 package GUI;
 
+import Client.Account;
 import Client.Person;
 
 import javax.swing.*;
@@ -112,11 +113,21 @@ public class LogIn extends JPanel{
                     s = userTextArea.getText();
                     while (line != null) {
                         if (line.equalsIgnoreCase("id: " + s)) {
+                            String id=line;
                             line = input.readLine();
                             s = passwordField.getText();
                             if(line.equalsIgnoreCase("password: " + s)) {
+                             String firstName = input.readLine();
+                             String lastName = input.readLine();
+                             String gender = input.readLine();
+                             String address = input.readLine();
+                             String nationality = input.readLine();
+
+                             Person person = new Person(id, firstName, lastName,gender,
+                                     address, nationality);
+                                Account account = new Account(person);
+
                                 Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
-                                
                             }
                             else{
                                 JOptionPane.showMessageDialog(null, "Wrong password. Try again!");

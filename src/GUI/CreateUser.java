@@ -197,14 +197,13 @@ public class CreateUser extends JPanel {
                             print.close();
 
                             JOptionPane.showMessageDialog(null, "User information saved");
-                            setVisible(false);
 
                             Person person = new Person(idNumberInput.getText(), firstNameInput.getText(), lastNameInput.getText(),
                                     genderInput.getText(), addressInput.getText(), nationalityInput.getText());
                             Account a = new Account(person);
                             a.writeToFile(0, 0);
 
-                            Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
+                            Window.window.swapPage(Window.Page.LOGIN);
 
 
 
