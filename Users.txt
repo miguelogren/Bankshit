@@ -54,3 +54,10 @@ lastName: Hollander
 gender: male
 address: Hamngatan 13
 nationality Sweden
+id: 4444
+password: 123
+firstname: Hej
+lastName: Tjenaa
+gender: 
+address: 
+nationality 

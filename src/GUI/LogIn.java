@@ -1,6 +1,7 @@
 package GUI;
 
 import Client.Account;
+import Client.Logic;
 import Client.Person;
 
 import javax.swing.*;
@@ -10,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static java.lang.Boolean.TRUE;
 
@@ -23,6 +26,7 @@ public class LogIn extends JPanel{
     JPasswordField passwordField = new JPasswordField();
     JCheckBox showPasswordBox = new JCheckBox("Show password");
 
+    Logic logic = new Logic();
 
 
     LogIn() {
@@ -107,48 +111,10 @@ public class LogIn extends JPanel{
             String s;
 
             if (src == loginButton) {
-                try {
-                    BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
-                    String line = input.readLine();
-                    s = userTextArea.getText();
-                    while (line != null) {
-                        if (line.equalsIgnoreCase("id: " + s)) {
-                            String id=line;
-                            line = input.readLine();
-                            s = passwordField.getText();
-                            if(line.equalsIgnoreCase("password: " + s)) {
-                             String firstName = input.readLine();
-                             String lastName = input.readLine();
-                             String gender = input.readLine();
-                             String address = input.readLine();
-                             String nationality = input.readLine();
-
-                             Person person = new Person(id, firstName, lastName,gender,
-                                     address, nationality);
-                                Account account = new Account(person);
-
-                                Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
-                            }
-                            else{
-                                JOptionPane.showMessageDialog(null, "Wrong password. Try again!");
-                                break;
-                            }
-                            break;
-                        }
-                        else {
-                            line = input.readLine();
-                            if (line == null) {
-                                JOptionPane.showMessageDialog(null, "Användaren hittas ej - Korrigera felstavning eller" +
-                                        " skapa ny användare");
-                            }
-                        }
-                    }
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                logic.logIn(userTextArea, passwordField);
             }
-            if (src == createUser) {
 
+            if (src == createUser) {
                 try {
                     Window.window.swapPage(Window.Page.CREATEUSER);
                 } catch (IOException ex) {

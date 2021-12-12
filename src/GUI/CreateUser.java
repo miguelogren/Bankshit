@@ -2,6 +2,7 @@ package GUI;
 
 import Client.Account;
 import Client.Bank;
+import Client.Logic;
 import Client.Person;
 
 import javax.swing.*;
@@ -15,6 +16,8 @@ import java.io.*;
 import static java.lang.Boolean.TRUE;
 
 public class CreateUser extends JPanel {
+    Logic logic = new Logic();
+
     JLabel idNumber = new JLabel("Id number:");
     JLabel password = new JLabel("Password:");
     JLabel firstName = new JLabel("First name");
@@ -169,65 +172,21 @@ public class CreateUser extends JPanel {
             String s;
 
             if (src == save) {
-                boolean shouldPrint = true;
-                try {
-                    BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
-                    String line = input.readLine();
-                    s = idNumberInput.getText();
-                    while (line != null) {
-                        line = input.readLine();
-                        if (line != null && line.equalsIgnoreCase("id: " + s)) {
-                            JOptionPane.showMessageDialog(null, "Already registered user");
-                            shouldPrint = false;
-                            break;
-                        }
+                logic.createUser(idNumberInput, firstNameInput, lastNameInput, genderInput, addressInput,
+                        nationalityInput, pass);
+                if (src == returnButton) {
+                    try {
+                        Window.window.swapPage(Window.Page.LOGIN);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
                     }
-                    if (shouldPrint) {
-                        PrintWriter print;
-                        try {
-                            print = new PrintWriter(new BufferedWriter(new FileWriter("Users.txt", TRUE)));
-                            print.println("id: " + idNumberInput.getText());
-                            print.println("password: " + pass.getText());
-                            print.println("firstname: " + firstNameInput.getText());
-                            print.println("lastName: " + lastNameInput.getText());
-                            print.println("gender: " + genderInput.getText());
-                            print.println("address: " + addressInput.getText());
-                            print.println("nationality " + nationalityInput.getText());
-
-                            print.close();
-
-                            JOptionPane.showMessageDialog(null, "User information saved");
-
-                            Person person = new Person(idNumberInput.getText(), firstNameInput.getText(), lastNameInput.getText(),
-                                    genderInput.getText(), addressInput.getText(), nationalityInput.getText());
-                            Account a = new Account(person);
-                            a.writeToFile(0, 0);
-
-                            Window.window.swapPage(Window.Page.LOGIN);
-
-
-
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
                 }
-            }
 
-            if (src == returnButton) {
-                try {
-                    Window.window.swapPage(Window.Page.LOGIN);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
             }
-
         }
-    };
 
+
+    };
 
     private JLabel text(JLabel jLabel) {
         jLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -243,3 +202,4 @@ public class CreateUser extends JPanel {
     }
 
 }
+
