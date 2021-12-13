@@ -41,7 +41,6 @@ public class Window extends JFrame{
             }
         }
         add(currentPage);
-        pack();
         revalidate();
     }
 

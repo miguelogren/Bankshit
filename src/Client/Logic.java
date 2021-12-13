@@ -105,7 +105,13 @@ public class Logic {
         }
     }
 
-    public ArrayList<String> personFromFile() {
+    public String loggedInUser() throws IOException {
+        BufferedReader input = new BufferedReader(new FileReader("LoggedIn.txt"));
+        String loggedIn= input.readLine();
+        return loggedIn;
+    }
+
+    public ArrayList<String> personFromFile(String loggedInUser) {
 
         ArrayList<String> personList = new ArrayList<String>();
         String id = "";
@@ -116,9 +122,7 @@ public class Logic {
         String nationality = "";
 
         try {
-            BufferedReader input = new BufferedReader(new FileReader("LoggedIn.txt"));
-            String loggedInUser = input.readLine();
-            input = new BufferedReader(new FileReader("Users.txt"));
+            BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
             String line = input.readLine();
             while (line != null) {
                 line = input.readLine();
@@ -167,11 +171,6 @@ public class Logic {
 
 
     public static void main(String[] args) throws IOException {
-        Logic logic = new Logic();
-
-        for (String s : logic.personFromFile()) {
-            System.out.println(s);
-        }
 
     }
 }

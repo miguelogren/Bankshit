@@ -1,52 +1,4 @@
-id: 123
-password: 
-firstname: Erik
-lastName: 
-gender: 
-address: 
-nationality 
-id: 123
-password: 
-firstname: demo
-lastName: 
-gender: 
-address: 
-nationality 
-id: 333
-password: 
-firstname: Erik
-lastName: 
-gender: 
-address: 
-nationality 
-id: 7777
-password: 
-firstname: Erik
-lastName: 
-gender: 
-address: 
-nationality 
-id: 5555
-password: 
-firstname: lll
-lastName: 
-gender: 
-address: 
-nationality 
-id: 55551
-password: 
-firstname: Erik
-lastName: 
-gender: 
-address: 
-nationality 
-id: 2222
-password: 
-firstname: 
-lastName: 
-gender: 
-address: 
-nationality 
+Registrerade användare
 id: 9412170137
 password: 1234
 firstname: Erik
@@ -54,10 +6,10 @@ lastName: Hollander
 gender: male
 address: Hamngatan 13
 nationality Sweden
-id: 4444
-password: 123
-firstname: Hej
-lastName: Tjenaa
-gender: 
-address: 
-nationality 
+id: 9702135566
+password: 1234
+firstname: Test
+lastName: Testsson
+gender: Male
+address: Testgatan 2
+nationality Sweden

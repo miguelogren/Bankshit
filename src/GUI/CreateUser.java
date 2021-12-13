@@ -193,7 +193,6 @@ public class CreateUser extends JPanel {
             }
         }
 
-
     };
 
     private JLabel text(JLabel jLabel) {
