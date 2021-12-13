@@ -183,6 +183,14 @@ public class CreateUser extends JPanel {
                 }
 
             }
+
+            if(src==returnButton){
+                try {
+                    Window.window.swapPage(Window.Page.LOGIN);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
 
 
