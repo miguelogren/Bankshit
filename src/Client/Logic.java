@@ -26,17 +26,6 @@ public class Logic {
                         PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter("LoggedIn.txt")));
                         print.println(id);
                         print.close();
-
-                             /*String firstName = input.readLine();
-                             String lastName = input.readLine();
-                             String gender = input.readLine();
-                             String address = input.readLine();
-                             String nationality = input.readLine();
-
-                             Person person = new Person(id, firstName, lastName,gender,
-                                     address, nationality);
-                                Account account = new Account(person);
-                               */
                         Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
                     } else {
                         JOptionPane.showMessageDialog(null, "Wrong password. Try again!");
@@ -129,21 +118,21 @@ public class Logic {
                 if (line.equalsIgnoreCase(loggedInUser)) {
                     id = line;
                     input.readLine();
-                    firstName = input.readLine();
-                    lastName = input.readLine();
-                    gender = input.readLine();
-                    address = input.readLine();
-                    nationality = input.readLine();
+                        firstName = input.readLine();
+                        lastName = input.readLine();
+                        gender = input.readLine();
+                        address = input.readLine();
+                        nationality = input.readLine();
 
-                    personList.add(id);
-                    personList.add(firstName);
-                    personList.add(lastName);
-                    personList.add(gender);
-                    personList.add(address);
-                    personList.add(nationality);
-
+                        personList.add(id);
+                        personList.add(firstName);
+                        personList.add(lastName);
+                        personList.add(gender);
+                        personList.add(address);
+                        personList.add(nationality);
                     break;
                 }
+
             }
         } catch (IOException ex) {
             ex.printStackTrace();

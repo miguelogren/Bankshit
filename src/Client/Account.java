@@ -16,7 +16,14 @@ public class Account {
 
 
     public void writeToFile(int daily, int savings) throws IOException {
-        String fileName = person.getIdNumber() +".txt";
+        String fileName;
+
+        if (person.getIdNumber().startsWith("i")) {
+            fileName = person.getIdNumber().substring(4) + ".txt";
+        }else{
+            fileName = person.getIdNumber() +".txt";
+        }
+
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, TRUE)));
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line = reader.readLine();
@@ -85,7 +92,6 @@ public class Account {
                     printer.println("Savings account: " + newSavings);
                     printer.close();
 
-
         }else{
             newDaily = getDailyAccount() + amount;
             newSavings = getSavingsAccount() - amount;
@@ -97,25 +103,6 @@ public class Account {
     }
     public static void main(String[] args) throws IOException {
 
-        Person p = new Person("9901015577","Hej", "Hejsson","male", "Storgatan 7", "Sweden");
-        Account a = new Account(p);
-
-        Logic l = new Logic();
-        l.personFromFile("id: 9412170137");
-
-        Person p2 = new Person(l.personFromFile("id: 9412170137").get(0),
-                l.personFromFile("id: 9412170137").get(1),
-                l.personFromFile("id: 9412170137").get(2),
-                l.personFromFile("id: 9412170137").get(3),
-                l.personFromFile("id: 9412170137").get(4),
-                l.personFromFile("id: 9412170137").get(5));
-
-        Account a2 = new Account(p2);
-        a2.writeToFile(100, 200);
-
-
-        System.out.println(a2.getDailyAccount());
-        System.out.println(a2.getSavingsAccount());
     }
 
 }
