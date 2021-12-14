@@ -31,7 +31,8 @@ public class LogIn extends JPanel{
 
     LogIn() {
 
-        setPreferredSize(new Dimension(400, 250));
+        setBackground(Color.DARK_GRAY);
+        setPreferredSize(new Dimension(400, 500));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 20, 30);
@@ -41,6 +42,7 @@ public class LogIn extends JPanel{
         createUser.addMouseListener(buttonClick);
 
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        usernameLabel.setForeground(Color.white);
         usernameLabel.setOpaque(false);
 
         userTextArea.setFont(new Font("Arial", Font.ITALIC, 16));
@@ -52,8 +54,10 @@ public class LogIn extends JPanel{
         passwordField.setPreferredSize(new Dimension(157, 30));
 
         passwordLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        passwordLabel.setForeground(Color.white);
         passwordLabel.setOpaque(false);
 
+        showPasswordBox.setForeground(Color.white);
         showPasswordBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,10 +71,10 @@ public class LogIn extends JPanel{
 
 
         loginButton.setFont(new Font("Arial", Font.ITALIC, 16));
-        loginButton.setPreferredSize(new Dimension(100, 30));
+        loginButton.setPreferredSize(new Dimension(150, 30));
 
         createUser.setFont(new Font("Arial", Font.ITALIC, 16));
-        createUser.setPreferredSize(new Dimension(100, 30));
+        createUser.setPreferredSize(new Dimension(150, 30));
 
         gbc.gridy = 0;
         gbc.gridx = 0;
