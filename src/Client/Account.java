@@ -16,7 +16,7 @@ public class Account {
 
 
     public void writeToFile(int daily, int savings) throws IOException {
-        String fileName = person.getIdNumber().substring(4) +".txt";
+        String fileName = person.getIdNumber() +".txt";
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, TRUE)));
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line = reader.readLine();

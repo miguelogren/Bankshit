@@ -13,3 +13,17 @@ lastName: Testsson
 gender: Male
 address: Testgatan 2
 nationality Sweden
+id: 123456
+password: 1234
+firstname: 
+lastName: 
+gender: 
+address: 
+nationality 
+id: 123
+password: 55
+firstname: 
+lastName: 
+gender: 
+address: 
+nationality 
