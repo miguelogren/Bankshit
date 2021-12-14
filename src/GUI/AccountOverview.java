@@ -14,14 +14,14 @@ import java.io.IOException;
 public class AccountOverview extends JPanel {
 
     JButton payButton = new JButton("Betala");
-    JButton transferButton = new JButton("Överför mellan konton");
+    JButton transferButton = new JButton("Överför");
     JButton depositButton = new JButton("Insättning");
     JButton gambleButton = new JButton("Spela");
     JButton returnButton = new JButton("Return");
     JButton logOutButton = new JButton("Logga ut");
 
-    JLabel userName = new JLabel("");
-    JLabel userId = new JLabel("");
+    JLabel userName = new JLabel("", SwingConstants.CENTER);
+    JLabel userId = new JLabel("", SwingConstants.CENTER);
     JLabel dailyAccLabel = new JLabel("Daily acc", SwingConstants.CENTER);
     JLabel savingsAccLabel = new JLabel("Saving acc", SwingConstants.CENTER);
     JLabel fromAccount = new JLabel("Från konto", SwingConstants.CENTER);
@@ -62,6 +62,14 @@ public class AccountOverview extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        fromAccount.setForeground(Color.white);
+        fromAccount.setFont(new Font("Arial", Font.ITALIC, 12));
+        toAccount.setForeground(Color.white);
+        toAccount.setFont(new Font("Arial", Font.ITALIC, 12));
+        amount.setForeground(Color.white);
+        amount.setFont(new Font("Arial",Font.ITALIC,12));
 
         add(accountsDropDownList).setVisible(false);
         add(accountsDropDownList2).setVisible(false);
@@ -88,30 +96,28 @@ public class AccountOverview extends JPanel {
         add(amount).setVisible(false);
 
 
-        setSize(700, 500);
+        setSize(400, 500);
+        setBackground(Color.DARK_GRAY);
 
-        userId.setFont(new Font("Arial", Font.ITALIC, 12));
-        userName.setFont(new Font("Arial", Font.ITALIC, 12));
+        userId.setFont(new Font("Arial", Font.ITALIC, 16));
+        userId.setForeground(Color.white);
+        userName.setFont(new Font("Arial", Font.ITALIC, 16));
+        userName.setForeground(Color.white);
 
         userId.setText("" + logic.personFromFile(logic.loggedInUser()).get(0).substring(4));
 
         userName.setText("" + logic.personFromFile(logic.loggedInUser()).get(1).substring(11) + " " +
                 logic.personFromFile(logic.loggedInUser()).get(2).substring(10));
 
-        dailyAccLabel.setOpaque(true);
-        dailyAccLabel.setPreferredSize(new Dimension(200, 50));
+        dailyAccLabel.setForeground(Color.white);
+        dailyAccLabel.setPreferredSize(new Dimension(150,100));
         dailyAccLabel.setFont(new Font("Arial", Font.PLAIN, 22));
         dailyAccLabel.setText("Daily: " + logic.readAccount().get(0));
 
-        savingsAccLabel.setOpaque(true);
-        savingsAccLabel.setPreferredSize(new Dimension(200, 50));
+        savingsAccLabel.setForeground(Color.white);
+        savingsAccLabel.setPreferredSize(new Dimension(150,100));
         savingsAccLabel.setFont(new Font("Arial", Font.PLAIN, 22));
         savingsAccLabel.setText("Savings: " + logic.readAccount().get(1));
-
-        payButton.setPreferredSize(new Dimension(200, 30));
-        transferButton.setPreferredSize(new Dimension(150, 30));
-        gambleButton.setPreferredSize(new Dimension(150, 30));
-
 
         text(daily);
         text(savings);
@@ -129,19 +135,27 @@ public class AccountOverview extends JPanel {
 
         gbc.gridy = 1;
         gbc.gridx = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = 2;
         add(dailyAccLabel, gbc);
 
-        gbc.gridy = 2;
-        gbc.gridx = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = 2;
+        gbc.gridy = 1;
+        gbc.gridx = 1;
         add(savingsAccLabel, gbc);
 
         gbc.gridy = 3;
         gbc.gridx = 0;
         add(payButton, gbc);
+
+        gbc.gridy = 3;
+        gbc.gridx = 1;
+        add(depositButton, gbc);
+
+        gbc.gridy = 4;
+        gbc.gridx = 1;
+        add(gambleButton, gbc);
+
+        gbc.gridy = 4;
+        gbc.gridx = 0;
+        add(transferButton, gbc);
 
         gbc.gridy = 4;
         gbc.gridx = 0;
@@ -150,14 +164,6 @@ public class AccountOverview extends JPanel {
         gbc.gridy = 5;
         gbc.gridx = 0;
         add(accountsDropDownList2, gbc);
-
-        gbc.gridy = 4;
-        gbc.gridx = 0;
-        add(depositButton, gbc);
-
-        gbc.gridy = 5;
-        gbc.gridx = 0;
-        add(transferButton, gbc);
 
         gbc.gridy = 6;
         gbc.gridx = 0;
@@ -183,16 +189,13 @@ public class AccountOverview extends JPanel {
         gbc.gridx = 0;
         add(savings, gbc);
 
-        gbc.gridy = 9;
-        gbc.gridx = 0;
-        add(gambleButton, gbc);
-
         gbc.gridy = 11;
         gbc.gridx = 0;
         add(returnButton, gbc);
 
         gbc.gridy = 11;
         gbc.gridx = 0;
+        gbc.gridwidth = 2;
         add(logOutButton, gbc);
 
     }
@@ -320,7 +323,6 @@ public class AccountOverview extends JPanel {
 
     private JTextArea userInput(JTextArea jTextArea) {
         jTextArea.setFont(new Font("Arial", Font.ITALIC, 16));
-        jTextArea.setPreferredSize(new Dimension(150, 22));
         jTextArea.setLineWrap(true);
         return jTextArea;
     }

@@ -20,7 +20,8 @@ public class Window extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        setSize(500,700);
+        setSize(400,500);
+        setBackground(Color.DARK_GRAY);
 
     }
     public void swapPage(Page page) throws IOException {
