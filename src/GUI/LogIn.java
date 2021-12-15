@@ -115,7 +115,11 @@ public class LogIn extends JPanel{
             String s;
 
             if (src == loginButton) {
-                logic.logIn(userTextArea, passwordField);
+                try {
+                    logic.logIn(userTextArea, passwordField);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             if (src == createUser) {

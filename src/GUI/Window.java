@@ -12,6 +12,7 @@ public class Window extends JFrame{
         LOGIN,
         CREATEUSER,
         ACCOUNTOVERVIEW,
+        ADMINOVERVIEW,
     }
 
     JPanel currentPage = new JPanel();
@@ -38,6 +39,10 @@ public class Window extends JFrame{
             }
             case ACCOUNTOVERVIEW: {
                 currentPage = new AccountOverview();
+                break;
+            }
+            case ADMINOVERVIEW: {
+                currentPage = new AdminOverview();
                 break;
             }
         }

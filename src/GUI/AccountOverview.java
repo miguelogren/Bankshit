@@ -17,8 +17,12 @@ public class AccountOverview extends JPanel {
     JButton transferButton = new JButton("Överför");
     JButton depositButton = new JButton("Insättning");
     JButton gambleButton = new JButton("Spela");
+    JButton gambleButton2 = new JButton("Spela");
     JButton returnButton = new JButton("Return");
     JButton logOutButton = new JButton("Logga ut");
+    JButton blackButton = new JButton("");
+    JButton redButton = new JButton("");
+    JButton randomButton = new JButton("");
 
     JLabel userName = new JLabel("", SwingConstants.CENTER);
     JLabel userId = new JLabel("", SwingConstants.CENTER);
@@ -27,6 +31,7 @@ public class AccountOverview extends JPanel {
     JLabel fromAccount = new JLabel("Från konto", SwingConstants.CENTER);
     JLabel toAccount = new JLabel("Till konto", SwingConstants.CENTER);
     JLabel amount = new JLabel("Belopp", SwingConstants.CENTER);
+    JLabel winnerText = new JLabel(" ", SwingConstants.CENTER);
 
     String[] accountList = { " ", "from daily to savings", "from savings to daily"};
     JComboBox accountsDropDownList = new JComboBox(accountList);
@@ -51,6 +56,13 @@ public class AccountOverview extends JPanel {
 
     Account account = new Account(person);
 
+    GridBagConstraints gbc = new GridBagConstraints();
+
+    int colorPick = 0;
+    int randomNr = 0;
+    int winOrLoss = 0;
+    boolean win;
+
     public AccountOverview() throws IOException {
 
         transferButton.addMouseListener(buttonClick);
@@ -58,9 +70,12 @@ public class AccountOverview extends JPanel {
         payButton.addMouseListener(buttonClick);
         logOutButton.addMouseListener(buttonClick);
         depositButton.addMouseListener(buttonClick);
+        gambleButton.addMouseListener(buttonClick);
+        blackButton.addMouseListener(buttonClick);
+        redButton.addMouseListener(buttonClick);
+        gambleButton2.addMouseListener(buttonClick);
 
         setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -72,32 +87,38 @@ public class AccountOverview extends JPanel {
         amount.setForeground(Color.white);
         amount.setFont(new Font("Arial",Font.ITALIC,12));
 
-        add(accountsDropDownList).setVisible(false);
-        add(accountsDropDownList2).setVisible(false);
-
         add(userName);
         add(userId);
         add(dailyAccLabel);
         add(savingsAccLabel);
+        add(logOutButton);
+        add(depositButton);
+        add(gambleButton2).setVisible(false);
 
         add(daily).setVisible(false);
         add(transferInput).setVisible(false);
-
         add(savings).setVisible(false);
         add(accountIdInput).setVisible(false);
-
         add(fromAccount).setVisible(false);
         add(toAccount).setVisible(false);
-
-        add(logOutButton);
-
-        add(depositButton);
         add(returnButton).setVisible(false);
-
         add(amount).setVisible(false);
+        add(accountsDropDownList).setVisible(false);
+        add(accountsDropDownList2).setVisible(false);
+        add(randomButton).setVisible(false);
+        gbc.fill=GridBagConstraints.BOTH;
+        add(blackButton,gbc);
+        blackButton.setVisible(false);
+
+        gbc.fill=GridBagConstraints.BOTH;
+        add(redButton,gbc);
+        redButton.setVisible(false);
 
 
-        setSize(400, 500);
+        randomButton.setPreferredSize(new Dimension(50,50));
+
+
+        //setSize(700, 500);
         setBackground(Color.DARK_GRAY);
 
         userId.setFont(new Font("Arial", Font.ITALIC, 16));
@@ -155,6 +176,10 @@ public class AccountOverview extends JPanel {
         add(gambleButton, gbc);
 
         gbc.gridy = 4;
+        gbc.gridx = 1;
+        add(gambleButton2, gbc);
+
+        gbc.gridy = 4;
         gbc.gridx = 0;
         add(transferButton, gbc);
 
@@ -206,7 +231,6 @@ public class AccountOverview extends JPanel {
         public void mouseClicked(MouseEvent e) throws ClassCastException {
 
             Object src = e.getSource();
-            String s;
 
             if (src == transferButton){
                 accountsDropDownList.setVisible(true);
@@ -338,6 +362,130 @@ public class AccountOverview extends JPanel {
                 }
             }
 
+            if (src==gambleButton) {
+
+                payButton.setVisible(false);
+                depositButton.setVisible(false);
+                transferButton.setVisible(false);
+                gambleButton.setVisible(false);
+                gambleButton2.setVisible(true);
+                logOutButton.setVisible(false);
+
+
+                fromAccount.setVisible(true);
+                accountsDropDownList2.setVisible(true);
+                amount.setVisible(true);
+                redButton.setVisible(true);
+                blackButton.setVisible(true);
+                transferInput.setVisible(true);
+                randomButton.setVisible(true);
+
+                returnButton.setVisible(true);
+
+                gbc.gridy = 3;
+                gbc.gridx = 0;
+                gbc.gridwidth = 3;
+                add(gambleButton2, gbc);
+
+                gbc.gridy = 4;
+                gbc.gridx = 1;
+                add(amount, gbc);
+
+                gbc.gridy = 5;
+                gbc.gridx = 1;
+                add(transferInput, gbc);
+
+                gbc.gridy = 10;
+                gbc.gridx = 0;
+                gbc.fill = GridBagConstraints.BOTH;
+                gbc.gridwidth = 1;
+                add(blackButton, gbc);
+                blackButton.setBackground(Color.black);
+                blackButton.setForeground(Color.black);
+
+                gbc.gridy = 10;
+                gbc.gridx = 1;
+                gbc.gridwidth = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+                add(redButton, gbc);
+                redButton.setBackground(Color.red);
+                redButton.setForeground(Color.red);
+
+                gbc.gridy = 12;
+                gbc.gridx = 0;
+                gbc.gridwidth = 2;
+                gbc.fill = GridBagConstraints.VERTICAL;
+                add(randomButton, gbc);
+
+                gbc.gridy = 13;
+                gbc.gridx = 0;
+                gbc.gridwidth = 2;
+                add(winnerText, gbc);
+                text(winnerText);
+
+                gbc.gridy = 15;
+                gbc.gridx = 0;
+                add(returnButton, gbc);
+            }
+                if(src == gambleButton2){
+
+                    randomNr = logic.randomNumber();
+                    win = logic.winOrNot(colorPick, randomNr);
+
+                    if(randomNr==1){
+                        randomButton.setBackground(Color.red);
+                    }else if(randomNr==2){
+                        randomButton.setBackground(Color.black);
+                    }
+                    if(win){
+                        winOrLoss = Integer.parseInt(transferInput.getText())*2;
+                        winnerText.setText("Grattis, du vann: " + winOrLoss + "kr");
+                        winnerText.setForeground(Color.green);
+                        try {
+                            account.writeToFile(winOrLoss/2,0);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }else {
+                        winOrLoss = Integer.parseInt(transferInput.getText());
+                        winnerText.setText("Otur, du förlorade: " + Integer.parseInt(transferInput.getText()) + "kr");
+                        winnerText.setForeground(Color.red);
+                        try {
+                            account.writeToFile(-winOrLoss,0);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    winnerText.setVisible(true);
+
+                    System.out.println(randomNr);
+                    System.out.println(win);
+
+                    try {
+                        dailyAccLabel.setText("" + account.getDailyAccount());
+                        savingsAccLabel.setText("" + account.getSavingsAccount());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+
+            if(src==redButton){
+                blackButton.setText("");
+                    redButton.setText("X");
+                    redButton.setForeground(Color.WHITE);
+                    colorPick = 1;
+                System.out.println(colorPick);
+            }
+
+            if(src==blackButton){
+                redButton.setText("");
+                blackButton.setText("X");
+                blackButton.setForeground(Color.WHITE);
+                colorPick = 2;
+                System.out.println(colorPick);
+            }
+
             if (src==returnButton){
                 try {
                     Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
@@ -357,7 +505,6 @@ public class AccountOverview extends JPanel {
         }
 
     };
-
 
     private JLabel text(JLabel jLabel) {
         jLabel.setFont(new Font("Arial", Font.BOLD, 18));

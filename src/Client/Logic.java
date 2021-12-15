@@ -6,42 +6,49 @@ import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static java.lang.Boolean.TRUE;
 
 public class Logic {
 
-    public void logIn(JTextArea userTextArea, JPasswordField passwordField) {
-        try {
-            BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
-            String line = input.readLine();
-            String s = userTextArea.getText();
-            while (line != null) {
-                if (line.equalsIgnoreCase("id: " + s)) {
-                    String id = line;
-                    line = input.readLine();
-                    s = passwordField.getText();
-                    if (line.equalsIgnoreCase("password: " + s)) {
+    public void logIn(JTextArea userTextArea, JPasswordField passwordField) throws IOException {
 
-                        PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter("LoggedIn.txt")));
-                        print.println(id);
-                        print.close();
-                        Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Wrong password. Try again!");
+        if (userTextArea.getText().equals("admin")) {
+            Window.window.swapPage(Window.Page.ADMINOVERVIEW);
+        } else {
+
+            try {
+                BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
+                String line = input.readLine();
+                String s = userTextArea.getText();
+                while (line != null) {
+                    if (line.equalsIgnoreCase("id: " + s)) {
+                        String id = line;
+                        line = input.readLine();
+                        s = passwordField.getText();
+                        if (line.equalsIgnoreCase("password: " + s)) {
+
+                            PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter("LoggedIn.txt")));
+                            print.println(id);
+                            print.close();
+                            Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Wrong password. Try again!");
+                            break;
+                        }
                         break;
-                    }
-                    break;
-                } else {
-                    line = input.readLine();
-                    if (line == null) {
-                        JOptionPane.showMessageDialog(null, "Användaren hittas ej - Korrigera felstavning eller" +
-                                " skapa ny användare");
+                    } else {
+                        line = input.readLine();
+                        if (line == null) {
+                            JOptionPane.showMessageDialog(null, "Användaren hittas ej - Korrigera felstavning eller" +
+                                    " skapa ny användare");
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 
@@ -96,7 +103,7 @@ public class Logic {
 
     public String loggedInUser() throws IOException {
         BufferedReader input = new BufferedReader(new FileReader("LoggedIn.txt"));
-        String loggedIn= input.readLine();
+        String loggedIn = input.readLine();
         return loggedIn;
     }
 
@@ -118,18 +125,18 @@ public class Logic {
                 if (line.equalsIgnoreCase(loggedInUser)) {
                     id = line;
                     input.readLine();
-                        firstName = input.readLine();
-                        lastName = input.readLine();
-                        gender = input.readLine();
-                        address = input.readLine();
-                        nationality = input.readLine();
+                    firstName = input.readLine();
+                    lastName = input.readLine();
+                    gender = input.readLine();
+                    address = input.readLine();
+                    nationality = input.readLine();
 
-                        personList.add(id);
-                        personList.add(firstName);
-                        personList.add(lastName);
-                        personList.add(gender);
-                        personList.add(address);
-                        personList.add(nationality);
+                    personList.add(id);
+                    personList.add(firstName);
+                    personList.add(lastName);
+                    personList.add(gender);
+                    personList.add(address);
+                    personList.add(nationality);
                     break;
                 }
 
@@ -158,8 +165,24 @@ public class Logic {
         return accounts;
     }
 
+    public int randomNumber() {
+        Random random = new Random();
+        int randomNr = random.nextInt(2);
+       return randomNr+1;
+    }
+
+    public boolean winOrNot(int myNumber, int randomNumber){
+
+        if (randomNumber==myNumber){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     public static void main(String[] args) throws IOException {
+        Logic l = new Logic();
 
     }
 }
