@@ -46,7 +46,8 @@ public class AccountOverview extends JPanel {
     JTextArea transferInput = new JTextArea();
     JTextArea accountIdInput = new JTextArea();
 
-    Logic logic = new Logic();
+    Logic logic = Logic.getInstance();
+
     Person person = new Person(logic.personFromFile(logic.loggedInUser()).get(0),
             logic.personFromFile(logic.loggedInUser()).get(1),
             logic.personFromFile(logic.loggedInUser()).get(2),
@@ -331,6 +332,11 @@ public class AccountOverview extends JPanel {
             if (src==depositButton){
                 depositButton.setText("Sätt in");
 
+                gbc.gridy = 3;
+                gbc.gridx = 0;
+                gbc.gridwidth = 1;
+                add(depositButton, gbc);
+
                 payButton.setVisible(false);
                 depositButton.setVisible(true);
                 transferButton.setVisible(false);
@@ -457,9 +463,6 @@ public class AccountOverview extends JPanel {
                         }
                     }
                     winnerText.setVisible(true);
-
-                    System.out.println(randomNr);
-                    System.out.println(win);
 
                     try {
                         dailyAccLabel.setText("" + account.getDailyAccount());

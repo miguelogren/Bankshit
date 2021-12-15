@@ -12,6 +12,13 @@ import static java.lang.Boolean.TRUE;
 
 public class Logic {
 
+    private static class Holder {
+        static final Logic INSTANCE = new Logic();
+    }
+    public static Logic getInstance() {
+        return Holder.INSTANCE;
+    }
+
     public void logIn(JTextArea userTextArea, JPasswordField passwordField) throws IOException {
 
         if (userTextArea.getText().equals("admin")) {
@@ -179,11 +186,6 @@ public class Logic {
         else {
             return false;
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        Logic l = new Logic();
-
     }
 }
 

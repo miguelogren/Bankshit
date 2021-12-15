@@ -26,7 +26,7 @@ public class LogIn extends JPanel{
     JPasswordField passwordField = new JPasswordField();
     JCheckBox showPasswordBox = new JCheckBox("Show password");
 
-    Logic logic = new Logic();
+    Logic logic = Logic.getInstance();
 
 
     LogIn() {

@@ -7,8 +7,9 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class Account {
+
+
     Person person;
-    ArrayList<Integer> accountList = new ArrayList<>();
 
     public Account (Person person){
         this.person = person;
@@ -82,7 +83,6 @@ public class Account {
         int newDaily;
         int newSavings;
 
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
         if(fromAcc.startsWith("D")){
                     newDaily = getDailyAccount() - amount;
@@ -101,10 +101,6 @@ public class Account {
             printer.close();
         }
     }
-    public static void main(String[] args) throws IOException {
-
-    }
-
 }
 
 

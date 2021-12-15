@@ -6,3 +6,24 @@ lastName: Hollander
 gender: male
 address: Hamngatan 13
 nationality Sweden
+id: 7711304511
+password: 1234
+firstname: Kalle
+lastName: Karlsson
+gender: male
+address: Storgatan 13
+nationality Sweden
+id: 9911204031
+password: 1234
+firstname: Camilla
+lastName: Svensson
+gender: Female
+address: Sveavägen 31
+nationality Sweden
+id: 4130451122
+password: 1234
+firstname: Per
+lastName: Persson
+gender: male
+address: Lövgatan 2
+nationality Sweden
