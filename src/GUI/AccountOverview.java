@@ -33,10 +33,10 @@ public class AccountOverview extends JPanel {
     JLabel amount = new JLabel("Belopp", SwingConstants.CENTER);
     JLabel winnerText = new JLabel(" ", SwingConstants.CENTER);
 
-    String[] accountList = { " ", "from daily to savings", "from savings to daily"};
+    String[] accountList = {" ", "from daily to savings", "from savings to daily"};
     JComboBox accountsDropDownList = new JComboBox(accountList);
 
-    String[] accountList2 = { " ", "Daily", "Savings"};
+    String[] accountList2 = {" ", "Daily", "Savings"};
     JComboBox accountsDropDownList2 = new JComboBox(accountList2);
 
 
@@ -52,7 +52,7 @@ public class AccountOverview extends JPanel {
             logic.personFromFile(logic.loggedInUser()).get(1),
             logic.personFromFile(logic.loggedInUser()).get(2),
             logic.personFromFile(logic.loggedInUser()).get(3)
-            ,logic.personFromFile(logic.loggedInUser()).get(4),
+            , logic.personFromFile(logic.loggedInUser()).get(4),
             logic.personFromFile(logic.loggedInUser()).get(5));
 
     Account account = new Account(person);
@@ -86,7 +86,7 @@ public class AccountOverview extends JPanel {
         toAccount.setForeground(Color.white);
         toAccount.setFont(new Font("Arial", Font.ITALIC, 12));
         amount.setForeground(Color.white);
-        amount.setFont(new Font("Arial",Font.ITALIC,12));
+        amount.setFont(new Font("Arial", Font.ITALIC, 12));
 
         add(userName);
         add(userId);
@@ -107,16 +107,16 @@ public class AccountOverview extends JPanel {
         add(accountsDropDownList).setVisible(false);
         add(accountsDropDownList2).setVisible(false);
         add(randomButton).setVisible(false);
-        gbc.fill=GridBagConstraints.BOTH;
-        add(blackButton,gbc);
+        gbc.fill = GridBagConstraints.BOTH;
+        add(blackButton, gbc);
         blackButton.setVisible(false);
 
-        gbc.fill=GridBagConstraints.BOTH;
-        add(redButton,gbc);
+        gbc.fill = GridBagConstraints.BOTH;
+        add(redButton, gbc);
         redButton.setVisible(false);
 
 
-        randomButton.setPreferredSize(new Dimension(50,50));
+        randomButton.setPreferredSize(new Dimension(50, 50));
 
 
         //setSize(700, 500);
@@ -133,12 +133,12 @@ public class AccountOverview extends JPanel {
                 logic.personFromFile(logic.loggedInUser()).get(2).substring(10));
 
         dailyAccLabel.setForeground(Color.white);
-        dailyAccLabel.setPreferredSize(new Dimension(150,100));
+        dailyAccLabel.setPreferredSize(new Dimension(150, 100));
         dailyAccLabel.setFont(new Font("Arial", Font.PLAIN, 22));
         dailyAccLabel.setText("Daily: " + logic.readAccount().get(0));
 
         savingsAccLabel.setForeground(Color.white);
-        savingsAccLabel.setPreferredSize(new Dimension(150,100));
+        savingsAccLabel.setPreferredSize(new Dimension(150, 100));
         savingsAccLabel.setFont(new Font("Arial", Font.PLAIN, 22));
         savingsAccLabel.setText("Savings: " + logic.readAccount().get(1));
 
@@ -233,7 +233,7 @@ public class AccountOverview extends JPanel {
 
             Object src = e.getSource();
 
-            if (src == transferButton){
+            if (src == transferButton) {
                 accountsDropDownList.setVisible(true);
                 transferInput.setVisible(true);
                 savings.setVisible(false);
@@ -247,20 +247,20 @@ public class AccountOverview extends JPanel {
                 transferButton.setText("Överför");
                 revalidate();
 
-                if(src==transferButton){
+                if (src == transferButton) {
 
-                    if (accountsDropDownList.getSelectedItem()=="from daily to savings"){
+                    if (accountsDropDownList.getSelectedItem() == "from daily to savings") {
                         try {
-                            account.transferMoney(Integer.parseInt(transferInput.getText()),"D", "S");
+                            account.transferMoney(Integer.parseInt(transferInput.getText()), "D", "S");
                             dailyAccLabel.setText("Daily: " + account.getDailyAccount());
                             savingsAccLabel.setText("Savings: " + account.getSavingsAccount());
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
 
-                    }else if(accountsDropDownList.getSelectedItem()=="from savings to daily"){
+                    } else if (accountsDropDownList.getSelectedItem() == "from savings to daily") {
                         try {
-                            account.transferMoney(Integer.parseInt(transferInput.getText()),"S", "D");
+                            account.transferMoney(Integer.parseInt(transferInput.getText()), "S", "D");
                             dailyAccLabel.setText("Daily: " + account.getDailyAccount());
                             savingsAccLabel.setText("Savings: " + account.getSavingsAccount());
                         } catch (IOException ex) {
@@ -270,7 +270,7 @@ public class AccountOverview extends JPanel {
                 }
             }
 
-            if (src==payButton){
+            if (src == payButton) {
                 depositButton.setVisible(false);
                 transferButton.setVisible(false);
                 gambleButton.setVisible(false);
@@ -284,52 +284,52 @@ public class AccountOverview extends JPanel {
                 amount.setVisible(true);
                 transferInput.setVisible(true);
 
-                    if (accountsDropDownList2.getSelectedItem() == "Daily") {
-                        try {
-                            String aii = "id: " + accountIdInput.getText();
-                            Person reciever = new Person(logic.personFromFile(aii).get(0),
-                                    logic.personFromFile(aii).get(1),
-                                    logic.personFromFile(aii).get(2),
-                                    logic.personFromFile(aii).get(3),
-                                    logic.personFromFile(aii).get(4),
-                                    logic.personFromFile(aii).get(5));
-                            Account recievingAccount = new Account(reciever);
+                if (accountsDropDownList2.getSelectedItem() == "Daily") {
+                    try {
+                        String aii = "id: " + accountIdInput.getText();
+                        Person reciever = new Person(logic.personFromFile(aii).get(0),
+                                logic.personFromFile(aii).get(1),
+                                logic.personFromFile(aii).get(2),
+                                logic.personFromFile(aii).get(3),
+                                logic.personFromFile(aii).get(4),
+                                logic.personFromFile(aii).get(5));
+                        Account recievingAccount = new Account(reciever);
 
-                            account.writeToFile(-Integer.parseInt(transferInput.getText()), 0);
-                            recievingAccount.writeToFile(Integer.parseInt(transferInput.getText()), 0);
-                            dailyAccLabel.setText("Daily: " + account.getDailyAccount());
-                            savingsAccLabel.setText("Savings: " + account.getSavingsAccount());
+                        account.writeToFile(-Integer.parseInt(transferInput.getText()), 0);
+                        recievingAccount.writeToFile(Integer.parseInt(transferInput.getText()), 0);
+                        dailyAccLabel.setText("Daily: " + account.getDailyAccount());
+                        savingsAccLabel.setText("Savings: " + account.getSavingsAccount());
 
 
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-
-                    } else if (accountsDropDownList2.getSelectedItem() == "Savings") {
-                        try {
-                            String aii = "id: " + accountIdInput.getText();
-
-                            System.out.println(aii);
-
-                            Person reciever = new Person(logic.personFromFile(aii).get(0),
-                                    logic.personFromFile(aii).get(1),
-                                    logic.personFromFile(aii).get(2),
-                                    logic.personFromFile(aii).get(3),
-                                    logic.personFromFile(aii).get(4),
-                                    logic.personFromFile(aii).get(5));
-                            Account recievingAccount = new Account(reciever);
-                            account.writeToFile(0, -Integer.parseInt(transferInput.getText()));
-                            recievingAccount.writeToFile(Integer.parseInt(transferInput.getText()), 0);
-                            dailyAccLabel.setText("Daily: " + account.getDailyAccount());
-                            savingsAccLabel.setText("Savings: " + account.getSavingsAccount());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
                     }
+
+                } else if (accountsDropDownList2.getSelectedItem() == "Savings") {
+                    try {
+                        String aii = "id: " + accountIdInput.getText();
+
+                        System.out.println(aii);
+
+                        Person reciever = new Person(logic.personFromFile(aii).get(0),
+                                logic.personFromFile(aii).get(1),
+                                logic.personFromFile(aii).get(2),
+                                logic.personFromFile(aii).get(3),
+                                logic.personFromFile(aii).get(4),
+                                logic.personFromFile(aii).get(5));
+                        Account recievingAccount = new Account(reciever);
+                        account.writeToFile(0, -Integer.parseInt(transferInput.getText()));
+                        recievingAccount.writeToFile(Integer.parseInt(transferInput.getText()), 0);
+                        dailyAccLabel.setText("Daily: " + account.getDailyAccount());
+                        savingsAccLabel.setText("Savings: " + account.getSavingsAccount());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
             }
 
-            if (src==depositButton){
+            if (src == depositButton) {
                 depositButton.setText("Sätt in");
 
                 gbc.gridy = 3;
@@ -368,7 +368,7 @@ public class AccountOverview extends JPanel {
                 }
             }
 
-            if (src==gambleButton) {
+            if (src == gambleButton) {
 
                 payButton.setVisible(false);
                 depositButton.setVisible(false);
@@ -433,55 +433,55 @@ public class AccountOverview extends JPanel {
                 gbc.gridx = 0;
                 add(returnButton, gbc);
             }
-                if(src == gambleButton2){
+            if (src == gambleButton2) {
 
-                    randomNr = logic.randomNumber();
-                    win = logic.winOrNot(colorPick, randomNr);
+                randomNr = logic.randomNumber();
+                win = logic.winOrNot(colorPick, randomNr);
 
-                    if(randomNr==1){
-                        randomButton.setBackground(Color.red);
-                    }else if(randomNr==2){
-                        randomButton.setBackground(Color.black);
-                    }
-                    if(win){
-                        winOrLoss = Integer.parseInt(transferInput.getText())*2;
-                        winnerText.setText("Grattis, du vann: " + winOrLoss + "kr");
-                        winnerText.setForeground(Color.green);
-                        try {
-                            account.writeToFile(winOrLoss/2,0);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }else {
-                        winOrLoss = Integer.parseInt(transferInput.getText());
-                        winnerText.setText("Otur, du förlorade: " + Integer.parseInt(transferInput.getText()) + "kr");
-                        winnerText.setForeground(Color.red);
-                        try {
-                            account.writeToFile(-winOrLoss,0);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                    winnerText.setVisible(true);
-
+                if (randomNr == 1) {
+                    randomButton.setBackground(Color.red);
+                } else if (randomNr == 2) {
+                    randomButton.setBackground(Color.black);
+                }
+                if (win) {
+                    winOrLoss = Integer.parseInt(transferInput.getText()) * 2;
+                    winnerText.setText("Grattis, du vann: " + winOrLoss + "kr");
+                    winnerText.setForeground(Color.green);
                     try {
-                        dailyAccLabel.setText("" + account.getDailyAccount());
-                        savingsAccLabel.setText("" + account.getSavingsAccount());
+                        account.writeToFile(winOrLoss / 2, 0);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
+                } else {
+                    winOrLoss = Integer.parseInt(transferInput.getText());
+                    winnerText.setText("Otur, du förlorade: " + Integer.parseInt(transferInput.getText()) + "kr");
+                    winnerText.setForeground(Color.red);
+                    try {
+                        account.writeToFile(-winOrLoss, 0);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                winnerText.setVisible(true);
 
+                try {
+                    dailyAccLabel.setText("" + account.getDailyAccount());
+                    savingsAccLabel.setText("" + account.getSavingsAccount());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
 
-            if(src==redButton){
+            }
+
+            if (src == redButton) {
                 blackButton.setText("");
-                    redButton.setText("X");
-                    redButton.setForeground(Color.WHITE);
-                    colorPick = 1;
+                redButton.setText("X");
+                redButton.setForeground(Color.WHITE);
+                colorPick = 1;
                 System.out.println(colorPick);
             }
 
-            if(src==blackButton){
+            if (src == blackButton) {
                 redButton.setText("");
                 blackButton.setText("X");
                 blackButton.setForeground(Color.WHITE);
@@ -489,7 +489,7 @@ public class AccountOverview extends JPanel {
                 System.out.println(colorPick);
             }
 
-            if (src==returnButton){
+            if (src == returnButton) {
                 try {
                     Window.window.swapPage(Window.Page.ACCOUNTOVERVIEW);
                 } catch (IOException ex) {
@@ -497,7 +497,7 @@ public class AccountOverview extends JPanel {
                 }
             }
 
-            if (src==logOutButton){
+            if (src == logOutButton) {
                 try {
                     Window.window.swapPage(Window.Page.LOGIN);
                 } catch (IOException ex) {

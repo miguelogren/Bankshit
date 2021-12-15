@@ -13,3 +13,10 @@ lastName: Karlsson
 gender: Male
 address: Storgatan 3
 nationality: Sweden
+id: 9511215841
+password: 1234
+firstname: hannah
+lastName: quist
+gender: female
+address: hamngatan 13a
+nationality: sweden
