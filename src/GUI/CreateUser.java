@@ -1,9 +1,6 @@
 package GUI;
 
-import Client.Account;
-import Client.Bank;
 import Client.Logic;
-import Client.Person;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-
-import static java.lang.Boolean.TRUE;
 
 public class CreateUser extends JPanel {
     Logic logic = new Logic();

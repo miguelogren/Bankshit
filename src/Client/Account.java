@@ -25,7 +25,7 @@ public class Account {
             fileName = person.getIdNumber() +".txt";
         }
 
-        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileName, TRUE)));
+        PrintWriter printer; //= new PrintWriter(new BufferedWriter(new FileWriter(fileName, TRUE)));
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line = reader.readLine();
 

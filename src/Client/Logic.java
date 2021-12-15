@@ -77,14 +77,14 @@ public class Logic {
             if (shouldPrint) {
                 PrintWriter print;
                 try {
-                    print = new PrintWriter(new BufferedWriter(new FileWriter("Users.txt", TRUE)));
+                    print = new PrintWriter(new BufferedWriter(new FileWriter("Users.txt", TRUE))); //Skall det inte vara idnummer?
                     print.println("id: " + idNumberInput.getText());
                     print.println("password: " + pass.getText());
                     print.println("firstname: " + firstNameInput.getText());
                     print.println("lastName: " + lastNameInput.getText());
                     print.println("gender: " + genderInput.getText());
                     print.println("address: " + addressInput.getText());
-                    print.println("nationality " + nationalityInput.getText());
+                    print.println("nationality: " + nationalityInput.getText());
 
                     print.close();
 
@@ -125,7 +125,7 @@ public class Logic {
         String nationality = "";
 
         try {
-            BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
+            BufferedReader input = new BufferedReader(new FileReader("Users.txt")); //också här plocka textfilen från inskrivet id-nummer?
             String line = input.readLine();
             while (line != null) {
                 line = input.readLine();

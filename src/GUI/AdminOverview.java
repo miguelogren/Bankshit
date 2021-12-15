@@ -29,9 +29,12 @@ public class AdminOverview extends JPanel {
     JLabel accounts = new JLabel();
     JComboBox comboBox;
     JButton returnButton = new JButton("Return");
+    String userText;
 
 
     Logic logic = Logic.getInstance();
+
+
 
     AdminOverview() throws IOException {
 
@@ -69,12 +72,15 @@ public class AdminOverview extends JPanel {
                 userInformation.setVisible(true);
                 accounts.setVisible(true);
 
-                userInformation.setText(logic.personFromFile(comboBox.getSelectedItem().toString()).get(0)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(1)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(2)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(3)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(4)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(5));
+
+                userText = ("<html><body>" + logic.personFromFile(comboBox.getSelectedItem().toString()).get(0)
+                + "<br>" + logic.personFromFile(comboBox.getSelectedItem().toString()).get(1)
+                + "<br>" + logic.personFromFile(comboBox.getSelectedItem().toString()).get(2)
+                + "<br>" + logic.personFromFile(comboBox.getSelectedItem().toString()).get(3)
+                + "<br>" + logic.personFromFile(comboBox.getSelectedItem().toString()).get(4)
+                + "<br>" + logic.personFromFile(comboBox.getSelectedItem().toString()).get(5) + "</body></html>");
+
+                userInformation.setText(userText);
 
 
                 Person person = new Person(logic.personFromFile(comboBox.getSelectedItem().toString()).get(0),
@@ -101,7 +107,6 @@ public class AdminOverview extends JPanel {
             }
         }
     };
-
 }
 
 

@@ -5,7 +5,8 @@ firstname: Erik
 lastName: Hollander
 gender: male
 address: Hamngatan 13
-nationality Swedenid: 1
+nationality Sweden
+id: 1
 password: 1
 firstname: Jacob
 lastName: Johansson
@@ -19,3 +20,24 @@ lastName: Johansson
 gender: Male
 address: asd
 nationality Sverige
+id: 8901180359	
+password: potatis
+firstname: faggot
+lastName: lord
+gender: Trans
+address: gaystreet
+nationality weirdo
+id: 123456789
+password: potatis1
+firstname: abc
+lastName: qwe
+gender: gay
+address: gaystreet
+nationality weirdo
+id: 123123
+password: 123
+firstname: 123
+lastName: 456
+gender: gay
+address: asd
+nationality: zxc
