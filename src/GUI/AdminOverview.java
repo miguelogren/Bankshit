@@ -2,6 +2,7 @@ package GUI;
 
 import Client.Account;
 import Client.Logic;
+import Client.Person;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +30,6 @@ public class AdminOverview extends JPanel {
     JComboBox comboBox;
 
     Logic logic = Logic.getInstance();
-    String userID;
 
     AdminOverview() throws IOException {
 
@@ -53,7 +53,6 @@ public class AdminOverview extends JPanel {
         add(accounts, BorderLayout.CENTER);
         accounts.setVisible(false);
 
-
     }
 
     MouseAdapter buttonClick = new MouseAdapter() {
@@ -72,9 +71,18 @@ public class AdminOverview extends JPanel {
                         + logic.personFromFile(comboBox.getSelectedItem().toString()).get(4)
                         + logic.personFromFile(comboBox.getSelectedItem().toString()).get(5));
 
+
+                Person person = new Person(logic.personFromFile(comboBox.getSelectedItem().toString()).get(0),
+                        logic.personFromFile(comboBox.getSelectedItem().toString()).get(1),
+                        logic.personFromFile(comboBox.getSelectedItem().toString()).get(2),
+                        logic.personFromFile(comboBox.getSelectedItem().toString()).get(3),
+                        logic.personFromFile(comboBox.getSelectedItem().toString()).get(4),
+                        logic.personFromFile(comboBox.getSelectedItem().toString()).get(5));
+
+                Account account = new Account(person);
+
                 try {
-                    accounts.setText("Daily: " + logic.readAccount().get(0)+ " \n " +
-                           "Savings: " + logic.readAccount().get(1));
+                   accounts.setText("" + account.getDailyAccount() + " " + account.getSavingsAccount());
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
