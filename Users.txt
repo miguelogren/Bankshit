@@ -48,6 +48,13 @@ lastName:
 gender: 
 address: 
 nationality 
+id: 12356
+password: 
+firstname: abc
+lastName: 
+gender: 
+address: 
+nationality 
 id: 9511271111
 password: 1234
 firstname: Fredrik

@@ -1,5 +1,7 @@
 package GUI;
 
+import Client.Client;
+
 import javax.swing.*;
 import javax.xml.transform.Transformer;
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.io.IOException;
 
 
 public class Window extends JFrame{
-    public static Window window;
+    //public static Window window;
     public enum Page {
         LOGIN,
         CREATEUSER,
@@ -33,7 +35,7 @@ public class Window extends JFrame{
             }
             case CREATEUSER: {
                 currentPage = new CreateUser();
-                window.setPreferredSize(new Dimension(500,700));
+                Client.window.setPreferredSize(new Dimension(500,700));
                 break;
             }
             case ACCOUNTOVERVIEW: {
@@ -45,9 +47,9 @@ public class Window extends JFrame{
         revalidate();
     }
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         window = new Window();
         window.swapPage(Page.LOGIN);
-    }
+    }*/
 
 }
