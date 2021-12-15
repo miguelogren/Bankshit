@@ -28,6 +28,8 @@ public class AdminOverview extends JPanel {
     JLabel userInformation = new JLabel();
     JLabel accounts = new JLabel();
     JComboBox comboBox;
+    JButton returnButton = new JButton("Return");
+
 
     Logic logic = Logic.getInstance();
 
@@ -42,6 +44,9 @@ public class AdminOverview extends JPanel {
                 accountList.add(line);
             }
         }
+
+        returnButton.addMouseListener(buttonClick);
+        add(returnButton);
 
         comboBox = new JComboBox(accountList.toArray());
 
@@ -83,6 +88,13 @@ public class AdminOverview extends JPanel {
 
                 try {
                    accounts.setText("" + account.getDailyAccount() + " " + account.getSavingsAccount());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (src==returnButton){
+                try {
+                    Window.window.swapPage(Window.Page.LOGIN);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
