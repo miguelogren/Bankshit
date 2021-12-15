@@ -84,7 +84,7 @@ public class Logic {
                     print.println("lastName: " + lastNameInput.getText());
                     print.println("gender: " + genderInput.getText());
                     print.println("address: " + addressInput.getText());
-                    print.println("nationality " + nationalityInput.getText());
+                    print.println("nationality: " + nationalityInput.getText());
 
                     print.close();
 

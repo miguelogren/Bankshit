@@ -25,17 +25,25 @@ public class AdminOverview extends JPanel {
 
     ArrayList<String> accountList = new ArrayList<String>();
     JButton showInformationButton = new JButton("Visa information");
-    JLabel userInformation = new JLabel();
-    JLabel accounts = new JLabel();
+    JTextArea userInformation = new JTextArea();
+    JTextArea accounts = new JTextArea();
     JComboBox comboBox;
     JButton returnButton = new JButton("Return");
-
+    JPanel upperGrid = new JPanel();
+    JPanel midGrid = new JPanel();
 
     Logic logic = Logic.getInstance();
 
     AdminOverview() throws IOException {
 
-        new BorderLayout();
+        setLayout(new BorderLayout());
+
+        add(upperGrid, BorderLayout.NORTH);
+        add(midGrid, BorderLayout.CENTER);
+
+        upperGrid.setLayout(new GridLayout(1,2));
+        midGrid.setLayout(new GridLayout(2,1));
+
         BufferedReader input = new BufferedReader(new FileReader("Users.txt"));
         String line = input.readLine();
         while (line != null) {
@@ -46,17 +54,21 @@ public class AdminOverview extends JPanel {
         }
 
         returnButton.addMouseListener(buttonClick);
-        add(returnButton);
+        add(returnButton, BorderLayout.SOUTH);
 
         comboBox = new JComboBox(accountList.toArray());
 
-        add(comboBox, BorderLayout.NORTH);
-        add(showInformationButton, BorderLayout.NORTH);
         showInformationButton.addMouseListener(buttonClick);
-        add(userInformation, BorderLayout.CENTER);
-        userInformation.setVisible(false);
-        add(accounts, BorderLayout.CENTER);
-        accounts.setVisible(false);
+
+        upperGrid.add(comboBox);
+        upperGrid.add(showInformationButton);
+
+        midGrid.add(userInformation).setVisible(false);
+        midGrid.add(accounts).setVisible(false);
+
+        userInformation.setFont(new Font("Arial", Font.PLAIN, 22));
+        accounts.setFont(new Font("Arial", Font.PLAIN, 30));
+
 
     }
 
@@ -69,13 +81,11 @@ public class AdminOverview extends JPanel {
                 userInformation.setVisible(true);
                 accounts.setVisible(true);
 
-                userInformation.setText(logic.personFromFile(comboBox.getSelectedItem().toString()).get(0)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(1)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(2)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(3)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(4)
-                        + logic.personFromFile(comboBox.getSelectedItem().toString()).get(5));
-
+                userInformation.setText(logic.personFromFile(comboBox.getSelectedItem().toString()).get(1)
+                        +"\n"     + logic.personFromFile(comboBox.getSelectedItem().toString()).get(2)
+                        +"\n"     + logic.personFromFile(comboBox.getSelectedItem().toString()).get(3)
+                        +"\n"     + logic.personFromFile(comboBox.getSelectedItem().toString()).get(4)
+                        +"\n"     + logic.personFromFile(comboBox.getSelectedItem().toString()).get(5));
 
                 Person person = new Person(logic.personFromFile(comboBox.getSelectedItem().toString()).get(0),
                         logic.personFromFile(comboBox.getSelectedItem().toString()).get(1),
@@ -87,7 +97,8 @@ public class AdminOverview extends JPanel {
                 Account account = new Account(person);
 
                 try {
-                   accounts.setText("" + account.getDailyAccount() + " " + account.getSavingsAccount());
+                   accounts.setText("Daily Account: " + account.getDailyAccount() + "\n" +
+                           "Savings Account: " + account.getSavingsAccount());
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
